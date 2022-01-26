@@ -1,25 +1,18 @@
-from PIL import Image
-import pytesseract
-print(pytesseract.get_languages(config=''))
-result = pytesseract.image_to_string(Image.open('data/input/test.png'), lang='chi_sim')
-# print(result)
-
-
-
-
 import os
 import paddle
-paddle.fluid.install_check.run_check()
-
-from paddleocr import PaddleOCR, draw_ocr
+from pathlib import Path
+import cv2
+from paddleocr import PaddleOCR, draw_ocr,PPStructure, draw_structure_result, save_structure_res
 from PIL import Image
 
-img_path = 'data/input/test.jpg'
+# import paddle
+# paddle.fluid.install_check.run_check()
 
-def customer_ocr(img_path):
+def text_ocr(img_path, save_folder='./data/output'):
     ocr = PaddleOCR(use_angle_cls=False, lang='ch', use_gpu=False)
     result = ocr.ocr(img_path, cls=True)
-    out_txt = 'data/output/' + os.path.basename(img_path).rsplit('.',1)[0] + '.txt'
+    out_txt = os.path.join(save_folder, os.path.basename(img_path).rsplit('.',1)[0] + '.txt')
+    out_txt = Path(out_txt).as_posix()
     with open(out_txt, 'w', encoding='utf-8') as f:
         for line in result:
             # print(line[1])
@@ -28,12 +21,26 @@ def customer_ocr(img_path):
     boxes = [line[0] for line in result]
     txts = [line[1][0] for line in result]
     scores = [line[1][1] for line in result]
-    im_show = draw_ocr(image, boxes, txts, scores, font_path='data/fonts/simfang.ttf')
+    im_show = draw_ocr(image, boxes, txts, scores, font_path='simfang.ttf')
     im_show = Image.fromarray(im_show)
-    im_show.save('data/output/' + os.path.basename(img_path).rsplit('.',1)[0] + '.jpg', dpi=(300.0,300.0))
+    res_im_path = os.path.join(save_folder, os.path.basename(img_path).rsplit('.',1)[0] + '_result.jpg') 
+    res_im_path= Path(res_im_path).as_posix()
+    im_show.save(res_im_path, dpi=(300.0,300.0))
 
-customer_ocr(img_path)
-
+def table_ocr(img_path, save_folder='./data/output'):
+    table_engine = PPStructure(show_log=True)
+    img = cv2.imread(img_path)
+    result = table_engine(img)
+    save_structure_res(result, save_folder, os.path.basename(img_path).split('.')[0])
+    for line in result:
+        line.pop('img')
+        print(line)
+    # image = Image.open(img_path).convert('RGB')
+    # im_show = draw_structure_result(image, result, font_path='simfang.ttf')
+    # im_show = Image.fromarray(im_show)
+    # res_im_path = os.path.join(save_folder, os.path.basename(img_path).rsplit('.',1)[0], 'result.jpg') 
+    # res_im_path = Path(res_im_path).as_posix()
+    # im_show.save(res_im_path, dpi=(300.0,300.0))
 
 def get_img_path(dir_path):
     img_l = []
@@ -45,12 +52,11 @@ def get_img_path(dir_path):
     return img_l
    
 
-
-
 if __name__=="__mian__":
-    dir_path = 'data/input/other_1983.01-03（延安工务段）'
+    dir_path = 'data/input/'
     img_l = get_img_path(dir_path)
-    for img_path in img_l:
-        outImgPath = 'data/output/other_1983.01-03（延安工务段）/' + os.path.basename(img_path).rsplit('.',1)[0] + '.jpg'
-        out_txt = 'data/output/other_1983.01-03（延安工务段）/' + os.path.basename(img_path).rsplit('.',1)[0] + '.txt'
-        customer_ocr(img_path, outImgPath, out_txt)
+
+img_path = 'data/input/text0.jpg'
+text_ocr(img_path)
+# img_path = 'data/input/table3.jpg'
+table_ocr(img_path)
