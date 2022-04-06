@@ -1,6 +1,6 @@
 <font face="微软雅黑" color=white size=6>NLP</font><br/>
 # 1. NLP 四大基本任务
-
+**NLG (自然语言生成）NLU(自然语言处理）**
 ## 1.1. 序列标注
 分词 词性标注 命名实体识别
 
@@ -21,7 +21,7 @@ F1<br/>
 Rouge-L<br/>
 BLEU<br/>
 
-**NLG (自然语言生成）NLU(自然语言处理）**
+
 
 # 3. 自然语言处理的基本过程
 
