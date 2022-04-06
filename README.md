@@ -35,3 +35,6 @@ Recall<br/>
 F1<br/>
 Rouge-L<br/>
 BLEU<br/>
+
+graph LR
+    id1[(Database)]
