@@ -1,4 +1,5 @@
 <font face="微软雅黑" color=black size=6>NLP</font><br/>
+
 # 1. NLP 四大基本任务
 **NLG (自然语言生成）NLU(自然语言处理）**
 ## 1.1. 序列标注
