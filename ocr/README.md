@@ -14,12 +14,13 @@ apt-get install tesseract-ocr
 tesseract --version
 ```
 ## paddleocr
-官网连接https://github.com/PaddlePaddle
-paddleocr 需要先运行.py的脚本下载相关模型
+官网连接 https://github.com/PaddlePaddle</br>
+https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.4/ppstructure/docs/quickstart.md</br>
+paddleocr 需要先运行.py的脚本下载相关模型</br>
 paddlepaddle-gpu 版本注意支持的cuda版本
 
 ```bash
-pip install paddlepaddle==2.1.1 -i https://mirror.baidu.com/pypi/simple
+pip install paddlepaddle -i https://mirror.baidu.com/pypi/simple
 pip install -U https://paddleocr.bj.bcebos.com/whl/layoutparser-0.0.0-py3-none-any.
 pip install "paddleocr>=2.2"
 ```

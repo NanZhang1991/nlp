@@ -2,8 +2,7 @@
 .vscode/
 .idea/
 model_dirs/*
-data/input/*
-data/output/*
-
+input/
+output/
 # Except this file !.gitkeep
 !.gitkeep
