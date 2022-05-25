@@ -3,7 +3,6 @@
 .idea/
 .ipynb_checkpoints
 model_dirs/*
-input/
-output/
+data/
 # Except this file !.gitkeep
 !.gitkeep
