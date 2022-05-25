@@ -1,6 +1,7 @@
 # Ignore everything in this directory
 .vscode/
 .idea/
+__pycache__/
 .ipynb_checkpoints
 model_dirs/*
 data/
