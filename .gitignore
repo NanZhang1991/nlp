@@ -4,5 +4,7 @@
 __pycache__/
 .ipynb_checkpoints
 customer_data
+test_model
+runs
 # Except this file !.gitkeep
 !.gitkeep
