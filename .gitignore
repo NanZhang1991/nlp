@@ -3,7 +3,6 @@
 .idea/
 __pycache__/
 .ipynb_checkpoints
-runs
-data/
+customer_data
 # Except this file !.gitkeep
 !.gitkeep
